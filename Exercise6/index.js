@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import ProgressiveImage from './ProgressiveImage'
 
 const styles = StyleSheet.create({
   container: {
@@ -9,6 +10,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'relative',
+    backgroundColor: '#e1e4e8',
+    borderRadius: 10
   },
   image: {
     width: 300,
@@ -17,27 +20,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const imageSource = () => {
-  const cacheBreaker = `buster=${Math.random()}`;
-  const uri = `https://images.unsplash.com/photo-1485832329521-e944d75fa65e?auto=format&fit=crop&w=1000&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D&${cacheBreaker}`
-  return { uri };
-};
+const width = Dimensions.get('window').width
+const cacheBreaker = `buster=${Math.random()}`
 
 class Exercise6 extends Component {
   state = {
     loading: false,
-    imageSource: imageSource(),
   }
+
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
+          <ProgressiveImage
             style={styles.image}
-            source={this.state.imageSource}
+            thumbnailSource={{uri: `https://images.pexels.com/photos/671557/pexels-photo-671557.jpeg?w=50&${cacheBreaker}`}}
+            source={{uri: `https://images.pexels.com/photos/671557/pexels-photo-671557.jpeg?w=${width}&${cacheBreaker}`}}
+            resizeMode='cover'
           />
-        </View>
       </View>
     );
   }

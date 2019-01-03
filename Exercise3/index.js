@@ -14,6 +14,7 @@ const Exercise3 = () => (
       resizeMode="contain"
       style={{ height: 130, marginBottom: 60, marginTop: 60 }}
     />
+    
     <TextInput
       placeholder="email"
     />
